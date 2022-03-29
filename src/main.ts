@@ -1,8 +1,8 @@
-import { LightInputs } from './shaders';
 import { ParametricSurfaceData } from './surface-data';
 import { Wellenkugel } from './math-func';
-import { CreateSurfaceWithColormap } from './surface';
+import { CreateSurfaceWithColormap, LightInputs } from './surface';
 import $ from 'jquery';
+import "./site.css";
 
 const CreateSurface = async (li:LightInputs, isAnimation = true, colormapName = 'jet', scale = 1.5, scaley = 0) => {
     const data = ParametricSurfaceData(Wellenkugel, 0, 14.5, 0, 5, 100, 50, -10, 10, -10, 10, scale, scaley, colormapName);
@@ -25,7 +25,7 @@ $('#id-radio input:radio').on('click', function(){
 });
 
 $('#btn-redraw').on('click', function(){
-    li.isTwoSideLighting = $('#id-istwoside').val()?.toString();   
+    li.isTwoSideLighting = parseFloat($('#id-istwoside').val()?.toString()!);   
     scale = parseFloat($('#id-scale').val()?.toString()!);  
     scaley = parseFloat($('#id-scaley').val()?.toString()!);    
     CreateSurface(li, isAnimation, colormapName, scale, scaley);
